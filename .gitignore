@@ -1,0 +1,33 @@
+# ✅ Python 基本忽略
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.ipynb_checkpoints
+
+# ✅ 虛擬環境
+venv/
+env/
+.venv/
+ENV/
+
+# ✅ Checkpoint 與訓練暫存資料
+results/
+tokenized_dataset/
+finetuned_laborlaw_model/
+*.ckpt
+
+# ✅ 勞基法原始資料（信女要求）
+raw_laborlaw_txt/
+
+# ✅ 中繼輸出檔（可選忽略）
+predict.csv
+classification_report.json
+
+# ✅ 系統或 IDE 類
+.DS_Store
+.vscode/
+*.swp
+
+# ✅ Streamlit 快取（如用 st.cache）
+.cache/
