@@ -23,15 +23,16 @@ This repository focuses on fine-tuning a BERT model for classifying clauses with
 - **Framework**：Transformers + PyTorch + Trainer API
 - **前處理**：(1)條文句子斷句，去除特殊符號與空白、(2)以人工方式標註為 7～8 類主題標籤、(3)轉為 Hugging Face 格式進行訓練
 - **Label 分類**：
-  1. 工時
-  2. 薪資
-  3. 假別
-  4. 契約與聘僱關係
-  5. 終止與解僱
-  6. 職場安全與性別平等
-  7. 其他綜合規範
+  1. 工時 Working Hour
+  2. 薪資 Wage
+  3. 假別 Leaves
+  4. 契約與聘僱關係 Employment
+  5. 終止與解僱 Termination
+  6. 職場安全與性別平等 Workplace Safety and Gender Equality
+  7. 其他綜合規範 Others
   
 - 訓練腳本 `train_finetune_trainer.py` 可快速再訓練本模型。
+- F1 Score (macro avg): 0.86
 
 ## 🧾 資料結構 Data Files
   ├── raw_laborlaw_txt/              # 勞基法原始資料（未上傳 GitHub）
@@ -95,3 +96,8 @@ python inference.py --text "我想請育嬰留停"
 - [ ] 評估多標籤分類 / 長文本處理支援
 
 ---
+
+## 🔗 Related Links
+- 🤖 [Model card on Hugging Face Hub](https://huggingface.co/HUEI-JYUN-DEBBY-YEH/bert-labor-law-classifier)
+- 📂 [Medium article on training process](https://medium.com/@debby.yeh1994)
+- 🗂 [Portfolio summary](https://mango-mapusaurus-5df.notion.site/Debby-Yeh-NLP-Application-Engineer-Portfolio-1ca5118474d2801caa58de564fb53e38?pvs=4)
