@@ -1,3 +1,5 @@
+This repository focuses on fine-tuning a BERT model for classifying clauses within Taiwan's Labor Standards Act. The model is trained to categorize legal texts into predefined classes, facilitating efficient legal document analysis and information retrieval.
+
 # 🇹🇼 BERT Fine-tune for Taiwan Labor Law Classification  
 微調 BERT 中文模型應用於台灣勞基法分類任務  
 [→ 🔗 Hugging Face 模型卡連結](https://huggingface.co/DEBBY-YEH/finetuned-laborlaw-bert)
