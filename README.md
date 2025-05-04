@@ -64,4 +64,4 @@ Confidence Score: 0.88
 Debby Yeh
 - NLP Application Engineer
 - Specialized in: LLM, legal NLP, HR automation, chatbot systems
-🔗 Portfolio(https://www.notion.so/Debby-Yeh-Portfolio-1ca5118474d2801caa58de564fb53e38)
+- 🔗 Portfolio(https://www.notion.so/Debby-Yeh-Portfolio-1ca5118474d2801caa58de564fb53e38)
