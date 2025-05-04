@@ -1,103 +1,68 @@
-This repository focuses on fine-tuning a BERT model for classifying clauses within Taiwan's Labor Standards Act. The model is trained to categorize legal texts into predefined classes, facilitating efficient legal document analysis and information retrieval.
+### 🧑‍⚖️ BERT Fine-Tuning for Taiwan Labor Law Classification
+This project fine-tunes a pre-trained BERT model to classify legal text and inquiries under the Taiwan Labor Standards Act (LSA). It enables category prediction for labor-related questions, supporting the development of AI-powered legal assistants or HR tools for compliance and consultation.
 
-# 🇹🇼 BERT Fine-tune for Taiwan Labor Law Classification  
-微調 BERT 中文模型應用於台灣勞基法分類任務  
-[→ 🔗 Hugging Face 模型卡連結](https://huggingface.co/DEBBY-YEH/finetuned-laborlaw-bert)
+## 📌 Why This Project Matters
+Navigating labor law is often difficult for both employers and employees. Traditional legal chatbots struggle with low-resource domains and context-specific laws.
+This project demonstrates how fine-tuning BERT on a targeted legal domain—Taiwan’s LSA—can enable more accurate classification, interpretability, and human-aligned decision support in the HR and legal tech landscape.
 
----
+## 🧾 Dataset Overview
+# Source:
+- Manually annotated clauses from the Taiwan Labor Standards Act
+- 50 test queries generated via GPT-4 to simulate common labor-related HR questions
+# Format:
+- CSV with the following fields: text, category, label, context
+- Used for multi-class classification
+# Classification Categories (7 classes):
+- Working Hour
+- Wage
+- Leaves
+- Employment (Contract & Relations)
+- Termination
+- Workplace Safety and Gender Equality
+- Others (General Provisions)
 
-## 📘 專案介紹 Project Overview
+## ⚙️ Model Training
+- Base model: bert-base-chinese
+- Training method: Simple fine-tuning using HuggingFace's Trainer API
+- Training samples: 500+ annotated legal texts
+- Evaluation set: 50 GPT-generated questions labeled by hand
 
-本專案以 `bert-base-chinese` 為基礎，針對台灣勞基法問題句進行 fine-tuning 微調訓練，達成分類任務，預測問題所屬法條主題分類，支援應用於 AI Chatbot 智能問答場景。
+## 📊 Results
+# Model	Accuracy
+- Fine-tuned BERT	90%
+- High precision in classifying legal topics from real-world questions
+- Particularly strong in handling legal intent and sentence structure in Mandarin
+- Weaknesses observed in ambiguous or multi-label phrasing, indicating potential for future multi-label extension
 
-> This project fine-tunes a Chinese BERT model for multi-class classification on Taiwan Labor Law QA data. The goal is to classify user questions into predefined legal topics and support intelligent response systems such as chatbots.
+## 🧪 Usage
+Inference Example
+``bash
+python inference.py --text "每日工作不得超過幾小時？"
 
----
+``Output:
+Predicted Category: Working Hour
+Confidence Score: 0.88
 
-## 🛠 訓練與模型說明 Model & Training
+## 🧭 System Architecture
+[Input Text] → [Tokenizer] → [Fine-tuned BERT] → [Softmax Classifier] → [Category Label]
 
-- **Base model**：`bert-base-chinese` (via Hugging Face Transformers)
-- **Fine-tune dataset**：台灣勞基法 QA 語料，涵蓋 8 大類別
-- **Loss Function**：CrossEntropyLoss
-- **Optimizer**：AdamW
-- **Framework**：Transformers + PyTorch + Trainer API
-- **前處理**：(1)條文句子斷句，去除特殊符號與空白、(2)以人工方式標註為 7～8 類主題標籤、(3)轉為 Hugging Face 格式進行訓練
-- **Label 分類**：
-  1. 工時 Working Hour
-  2. 薪資 Wage
-  3. 假別 Leaves
-  4. 契約與聘僱關係 Employment
-  5. 終止與解僱 Termination
-  6. 職場安全與性別平等 Workplace Safety and Gender Equality
-  7. 其他綜合規範 Others
-  
-- 訓練腳本 `train_finetune_trainer.py` 可快速再訓練本模型。
-- F1 Score (macro avg): 0.86
+## 🛠 Tools & Libraries
+- Hugging Face Transformers
+- PyTorch
+- Pandas, Scikit-learn
+- Jupyter Notebook for evaluation
 
-## 🧾 資料結構 Data Files
-  ├── raw_laborlaw_txt/              # 勞基法原始資料（未上傳 GitHub）
-  ├── laborlaw_sentences_labeled.csv # 已標註的句子資料
-  ├── laborlaw_dataset.json          # 訓練用 JSON 格式
-  ├── label2id.json                  # 類別對應表
+## 🔍 Key Insights
+- Fine-tuning BERT in Mandarin for legal domains is feasible and effective with limited data.
+- Even a small labeled dataset can yield high-accuracy performance when domain-aligned.
+- Combining classification with retrieval (e.g., FAISS) may further enhance answer generation in a chatbot setting.
 
-## 📂 評估檔案：
-- classification_report.json：Precision / Recall / F1
-- laborlaw_predicted.csv：預測結果與 Ground Truth 比較
----
+## 🧱 Related Projects
+- AI Chatbot: Taiwan Labor Law QA System – integrates this classifier into a working chatbot (https://github.com/HUEI-JYUN-DEBBY-YEH/AI_Chatbot)
+- Medium Article: Building a Legal Chatbot with BERT (https://medium.com/@debby.yeh1994/bert-%E4%B8%AD%E6%96%87%E5%88%86%E9%A1%9E%E5%AF%A6%E4%BD%9C-%E6%89%93%E9%80%A0%E5%8F%B0%E7%81%A3%E5%8B%9E%E5%9F%BA%E6%B3%95-chatbot-%E6%99%BA%E8%83%BD%E6%A0%B8%E5%BF%83-e6c7c72f82de)
 
-## 🔍 使用方式 How to Use
-
-### 🖥 CLI 測試：  
-```bash
-python inference.py --text "我想請育嬰留停"
-```
-
-### 📤 輸出結果：
-```
-預測結果：職場安全與性別平等
-信心分數：0.313
-```
-![](./demo_output.png)
-
-### 📦 檔案說明：
-- `inference.py`：推論腳本，支援 CLI 測試與 API 整合
-- `label2id.json`：標籤與索引對應表
-- `model/`：包含微調後的 `.safetensors` 模型與 config
-
----
-
-## 🤖 應用延伸：整合 AI Chatbot 法規問答
-
-本模型已成功整合至下列專案：
-
-👉 [🔗 AI Chatbot 法規問答系統 GitHub Repo](https://github.com/HUEI-JYUN-DEBBY-YEH/AI_Chatbot)
-
-在該專案中，本模型擔任語意理解模組（NLU），用於判別使用者問題主題並導引向量檢索階段，進一步提供最相關法條條文／解釋函。
-
----
-
-## 🧠 模型託管｜Hugging Face Model Hosting
-
-🔗 [模型卡 Model Card 連結](https://huggingface.co/DEBBY-YEH/finetuned-laborlaw-bert)  
-包含以下資訊：
-- 模型摘要與訓練背景
-- 使用語言與任務
-- 標籤分類詳解
-- 推論方式與限制說明
-
----
-
-## ✅ TODO｜後續待辦與優化方向
-
-- [ ] 整合 Flask Web API 版本，方便應用部署
-- [ ] 於 Hugging Face Space 建立 Web Demo 展示頁
-- [ ] 提供前端頁面或 Chat UI 與模型對接
-- [ ] 擴增 QA 訓練資料與語義標註粒度
-- [ ] 評估多標籤分類 / 長文本處理支援
-
----
-
-## 🔗 Related Links
-- 🤖 [Model card on Hugging Face Hub](https://huggingface.co/HUEI-JYUN-DEBBY-YEH/bert-labor-law-classifier)
-- 📂 [Medium article on training process](https://medium.com/@debby.yeh1994)
-- 🗂 [Portfolio summary](https://mango-mapusaurus-5df.notion.site/Debby-Yeh-NLP-Application-Engineer-Portfolio-1ca5118474d2801caa58de564fb53e38?pvs=4)
+## 👩‍💻 Author
+Debby Yeh
+NLP Application Engineer
+Specialized in: LLM, legal NLP, HR automation, chatbot systems
+🔗 Portfolio(https://www.notion.so/Debby-Yeh-Portfolio-1ca5118474d2801caa58de564fb53e38)
