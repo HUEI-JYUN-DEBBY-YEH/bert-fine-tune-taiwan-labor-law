@@ -1,4 +1,4 @@
-### 🧑‍⚖️ BERT Fine-Tuning for Taiwan Labor Law Classification
+# 🧑‍⚖️ BERT Fine-Tuning for Taiwan Labor Law Classification
 This project fine-tunes a pre-trained BERT model to classify legal text and inquiries under the Taiwan Labor Standards Act (LSA). It enables category prediction for labor-related questions, supporting the development of AI-powered legal assistants or HR tools for compliance and consultation.
 
 ## 📌 Why This Project Matters
@@ -6,13 +6,13 @@ Navigating labor law is often difficult for both employers and employees. Tradit
 This project demonstrates how fine-tuning BERT on a targeted legal domain—Taiwan’s LSA—can enable more accurate classification, interpretability, and human-aligned decision support in the HR and legal tech landscape.
 
 ## 🧾 Dataset Overview
-# Source:
+### Source:
 - Manually annotated clauses from the Taiwan Labor Standards Act
 - 50 test queries generated via GPT-4 to simulate common labor-related HR questions
-# Format:
+### Format:
 - CSV with the following fields: text, category, label, context
 - Used for multi-class classification
-# Classification Categories (7 classes):
+### Classification Categories (7 classes):
 - Working Hour
 - Wage
 - Leaves
@@ -28,8 +28,7 @@ This project demonstrates how fine-tuning BERT on a targeted legal domain—Taiw
 - Evaluation set: 50 GPT-generated questions labeled by hand
 
 ## 📊 Results
-# Model	Accuracy
-- Fine-tuned BERT	90%
+- Model	Accuracy: Fine-tuned BERT	90%
 - High precision in classifying legal topics from real-world questions
 - Particularly strong in handling legal intent and sentence structure in Mandarin
 - Weaknesses observed in ambiguous or multi-label phrasing, indicating potential for future multi-label extension
@@ -63,6 +62,6 @@ Confidence Score: 0.88
 
 ## 👩‍💻 Author
 Debby Yeh
-NLP Application Engineer
-Specialized in: LLM, legal NLP, HR automation, chatbot systems
+- NLP Application Engineer
+- Specialized in: LLM, legal NLP, HR automation, chatbot systems
 🔗 Portfolio(https://www.notion.so/Debby-Yeh-Portfolio-1ca5118474d2801caa58de564fb53e38)
