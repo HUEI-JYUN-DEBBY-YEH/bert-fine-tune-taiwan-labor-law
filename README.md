@@ -1,3 +1,5 @@
+This project was part of my journey toward building fair, human-centered AI for workplace transformation.
+
 # 🧑‍⚖️ BERT Fine-Tuning for Taiwan Labor Law Classification
 This project fine-tunes a pre-trained BERT model to classify legal text and inquiries under the Taiwan Labor Standards Act (LSA). It enables category prediction for labor-related questions, supporting the development of AI-powered legal assistants or HR tools for compliance and consultation.
 
